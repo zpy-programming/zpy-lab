@@ -72,7 +72,7 @@ const ZpyLab: React.FC = () => {
     let autoRun = false;
 
     // Code is an encoded string of script. If code string is not empty, zpy lab will decode the parameter string and load to code editor
-    let code = "print('hello world');";
+    let code = "print('hello world')";
 
 
     if (lastRunningCode) {
