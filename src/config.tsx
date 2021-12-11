@@ -1,4 +1,4 @@
-const ZPY_DOMAIN = 'http://zpy-ide.rocke.top/'
+const ZPY_DOMAIN = 'http://zpy-lab.rocke.top/'
 const ZPY_API = 'https://service-jbqv5vwm-1302874749.gz.apigw.tencentcs.com/release/'
 const ZPY_API_URL = 'api/zpy'
 const ZPY_URL = ZPY_API + ZPY_API_URL
