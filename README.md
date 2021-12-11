@@ -27,20 +27,20 @@
 
 如果你想下载到本地运行，请先确保本地安装有Python3环境
 
-### 1.下载zpy-ide库
+### 1.下载zpy-lab库
 
 ``` shell
 # 从GitHub下载
 git clone https://github.com/louisyoungx/zpy-lab.git
 # 从Gitee下载
-git clone https://gitee.com/louisyoungx/zpy-ide.git
+git clone https://gitee.com/louisyoungx/zpy-lab.git
 ```
 
 ### 2.进入文件夹，安装依赖
 
 ``` shell
 # 进入文件夹
-cd zpy-ide
+cd zpy-lab
 # 安装依赖Flask
 yarn install
 ```
