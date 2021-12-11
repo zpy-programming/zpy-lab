@@ -23,7 +23,7 @@ export const compiler = (...param: readonly [string, string]) => {
   const run = async () => {
     // const code = await compile(param[1])
     // const result = await output(code)
-    const source = "# Zpy Code\n" + param[1]
+    const source = "#!zpy\n" + param[1]
     console.log("===== SOURCE =====\n" + source)
     const pyCode = zpyCompiler.compile(source)
     // const now = OUTPUT_TIME ? `[${time.getCurrentTime()}]:\n` : ''
