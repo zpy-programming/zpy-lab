@@ -1,6 +1,15 @@
 # Zpy Lab
 
-中文Python编程Lab
+中文Python编程Lab - 全新自主研发，打破国外垄断
+
+> **声明：本项目绝非[Hedgehog Lab](https://github.com/Hedgehog-Computing/hedgehog-lab)的套壳**
+- 这是我们全新自主研发的中文编程Lab
+- 当然我不是 Hedgehog Lab 套壳
+- Hedgehog 跟 Hedgehog Lab 是不一样的，Hedgehog能叫 Hedgehog Lab 吗？
+- 如果你一定要追根究底，那我确实是 Hedgehog Lab 套壳，但在未来我会删掉 Hedgehog Core 的代码
+- 借鉴已有的开源项目是很自然的事，可能你们对开源有误解
+- Zpy Lab采用微内核、形式化验证、比 Hedgehog Lab 快 600%
+- 不过第 6 点说的不是这个版本，而是 [zpy-ide](https://github.com/louisyoungx/zpy-ide)
 
 ## 介绍
 
@@ -54,4 +63,6 @@ yarn build
 - TypeScript
 - Monaco Editor
 
-本项目部分包含 [Hedgehog Lab]https://github.com/Hedgehog-Computing/hedgehog-lab) 中的代码 - [Apache 2.0协议](https://github.com/Hedgehog-Computing/hedgehog-lab/blob/master/LICENSE)
+
+
+> 本项目部分包含 [Hedgehog Lab](https://github.com/Hedgehog-Computing/hedgehog-lab) 中的代码 - [Apache 2.0协议](https://github.com/Hedgehog-Computing/hedgehog-lab/blob/master/LICENSE)
