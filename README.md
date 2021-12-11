@@ -54,4 +54,4 @@ yarn build
 - TypeScript
 - Monaco Editor
 
-本项目部分包含 [Hedgehog Lab](!https://github.com/Hedgehog-Computing/hedgehog-lab) 中的代码 (Apache 2.0协议)
+本项目部分包含 [Hedgehog Lab](https://github.com/Hedgehog-Computing/hedgehog-lab) 中的代码 (Apache 2.0协议)
