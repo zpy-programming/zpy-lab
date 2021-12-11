@@ -150,8 +150,8 @@ const library = {
         '随机': 'random',
         '性能计数器': 'perf_counter',
         '随机数': 'randint',
-        '拷贝': 'copy',
         '深拷贝': 'deepcopy',
+        '拷贝': 'copy',
     }
 }
 
