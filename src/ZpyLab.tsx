@@ -72,7 +72,7 @@ const ZpyLab: React.FC = () => {
     let autoRun = false;
 
     // Code is an encoded string of script. If code string is not empty, zpy lab will decode the parameter string and load to code editor
-    let code = "打印('你好，世界！')";
+    let code = `打印("你好, 世界!")`;
 
 
     if (lastRunningCode) {
@@ -133,7 +133,7 @@ const ZpyLab: React.FC = () => {
         if (source === input) {
             refetch({force: true} as any);
         } else {
-            console.log("===== SOURCE =====\n", source)
+            // console.log("===== SOURCE =====\n", source)
             setInput(source);
         }
     };

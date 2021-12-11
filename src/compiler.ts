@@ -23,11 +23,12 @@ export const compiler = (...param: readonly [string, string]) => {
   const run = async () => {
     // const code = await compile(param[1])
     // const result = await output(code)
-    const pyCode = zpyCompiler.compile(param[1])
-    console.log(param[1])
+    const source = "# Zpy Code\n" + param[1]
+    console.log("===== SOURCE =====\n" + source)
+    const pyCode = zpyCompiler.compile(source)
     // const now = OUTPUT_TIME ? `[${time.getCurrentTime()}]:\n` : ''
     const result = await zpyCompiler.exec(pyCode)
-    console.log("===== OUTPUT =====\n", result)
+    console.log("===== OUTPUT =====\n" + result)
     // @ts-ignore
     const outputString: string = result
     cleanup()

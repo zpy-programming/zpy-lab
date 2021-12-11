@@ -42,7 +42,7 @@ const reservedWords = {
 }
 
 const functionWords = {
-    regexp: '`/(?<=[^\u4e00-\u9fa5\\\\w])${key}(?=\\\\(.*\\\\))/gm`',
+    regexp: '`/(?<=([^\u4e00-\u9fa5\\\\w]|^))${key}(?=\\\\(.*\\\\))/gm`',
     safariReg: '`/${key}(?=\\\\(.*\\\\))/gm`',
     words: {
         '符': 'chr',
@@ -143,7 +143,7 @@ const functionWords = {
 }
 
 const library = {
-    regexp: '`/(?<=[^\u4e00-\u9fa5\\\\w])${key}(?=[^\u4e00-\u9fa5\\\\w])/gm`',
+    regexp: '`/(?<=([^\u4e00-\u9fa5\\\\w]|^))${key}(?=[^\u4e00-\u9fa5\\\\w])/gm`',
     safariReg: '`/${key}(?=[^\u4e00-\u9fa5\\\\w])/gm`',
     words: {
         '时间': 'time',
