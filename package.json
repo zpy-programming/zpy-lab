@@ -51,6 +51,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-mathjax": "^1.0.0",
     "@types/react-plotly.js": "^2.2.4",
+    "@typescript-eslint/parser": "^5.16.0",
     "cross-env": "^7.0.2",
     "customize-cra": "^1.0.0",
     "husky": "^4.2.5",
@@ -75,7 +76,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint"
+      "pre-commit": ""
     }
   },
   "browserslist": {

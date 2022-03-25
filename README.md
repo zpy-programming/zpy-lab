@@ -2,7 +2,6 @@
 
 中文Python编程Lab
 
-> - 前端实现参考自 [Hedgehog Lab](https://github.com/Hedgehog-Computing/hedgehog-lab)
 > - 轻量级版本 [zpy-ide](https://github.com/louisyoungx/zpy-ide)
 ## 介绍
 
@@ -35,18 +34,18 @@ git clone https://gitee.com/louisyoungx/zpy-lab.git
 # 进入文件夹
 cd zpy-lab
 # 安装依赖Flask
-yarn install
+npm install
 ```
 
 ### 3.启动 Zpy Lab
 
 ``` shell
-yarn start
+npm start
 ```
 
 ### 4.编译输出到build/目录
 ```shell
-yarn build
+npm build
 ```
 
 ## LICENSE

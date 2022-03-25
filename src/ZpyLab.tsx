@@ -1,183 +1,187 @@
-import React, {useEffect, useState} from 'react';
-import Qs from 'qs';
-import {CssBaseline, Grid, Toolbar} from '@mui/material';
-import {Theme} from '@mui/material/styles';
+import React, { useEffect, useState } from 'react'
+import Qs from 'qs'
+import { CssBaseline, Grid, Toolbar } from '@mui/material'
+import { Theme } from '@mui/material/styles'
 
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles'
+import makeStyles from '@mui/styles/makeStyles'
 
-import DownloadSnackbar from './components/DownloadSnackbar/DownloadSnackbar';
-import Header from './components/Header/Header';
-import YourCode from './components/YourCode/YourCode';
-import Results from './components/Results/Results';
-import Footer from './components/Footer/Footer';
-import SideBar from './components/SideBar/SideBar';
-import {tutorials} from './tutorials';
-import {queryCache, useQuery} from 'react-query';
-import {compiler} from './compiler';
+import DownloadSnackbar from './components/DownloadSnackbar/DownloadSnackbar'
+import Header from './components/Header/Header'
+import YourCode from './components/YourCode/YourCode'
+import Results from './components/Results/Results'
+import Footer from './components/Footer/Footer'
+import SideBar from './components/SideBar/SideBar'
+import { queryCache, useQuery } from 'react-query'
+import { tutorials } from './zpy/tutorials'
+import { compiler } from './compiler'
 
 const DEFAULT_SOURCE = `//write your code here
 print("hello world")
-`;
+`
 
 const lastRunningCode = localStorage.getItem('lastRunningCode')
 
 const ZpyLab: React.FC = () => {
-    const [source, setSource] = useState<string>(DEFAULT_SOURCE);
-    const [input, setInput] = useState<string>('');
-    const [localList, setLocalList] = useState<{ description: string; source: string }[]>([]);
-    const lgBreakpoint = window.matchMedia('(min-width: 1910px)');
-    const lgBreakpointMatches = lgBreakpoint.matches;
+    const [source, setSource] = useState<string>(DEFAULT_SOURCE)
+    const [input, setInput] = useState<string>('')
+    const [localList, setLocalList] = useState<
+        { description: string; source: string }[]
+    >([])
+    const lgBreakpoint = window.matchMedia('(min-width: 1910px)')
+    const lgBreakpointMatches = lgBreakpoint.matches
     // SideBar open prop
-    const [sideBarOpen, setOpen] = useState(lgBreakpointMatches);  //lgBreakpointMatches);
+    const [sideBarOpen, setOpen] = useState(lgBreakpointMatches) //lgBreakpointMatches);
 
     const [result, setResult] = useState({
-        outputString: ''
-    });
+        outputString: '',
+    })
 
     const getLocalCodeList = () => {
         try {
-            const result = localStorage.getItem('localNameList');
+            const result = localStorage.getItem('localNameList')
             if (result) {
-                const list = JSON.parse(result) as string[];
-                const newLocalList = [];
+                const list = JSON.parse(result) as string[]
+                const newLocalList = []
                 for (let i = 0; i < list.length; i++) {
                     if (list[i] !== 'localNameList') {
-
                         newLocalList.push({
                             description: list[i],
-                            source: localStorage.getItem(list[i]) as string
-                        });
-
+                            source: localStorage.getItem(list[i]) as string,
+                        })
                     }
                 }
                 //console.log(newLocalList);
-                setLocalList(newLocalList);
+                setLocalList(newLocalList)
             } else {
-                localStorage.setItem('localNameList', JSON.stringify(['localNameList']));
+                localStorage.setItem(
+                    'localNameList',
+                    JSON.stringify(['localNameList'])
+                )
             }
         } catch (err) {
-            throw new Error("Error while getting local code list: " + err);
+            throw new Error('Error while getting local code list: ' + err)
         }
-    };
+    }
 
-    const params = window.location.search;
+    const params = window.location.search
 
     // Below are parameters that control the behavior
 
     // The URL of a script. If user pass a path of script as URL, then download and load into code editor
-    let yourUrl = null;
+    let yourUrl = null
 
     // If auto_run=true, then zpy lab will run the script automatically after loading the code
-    let autoRun = false;
+    let autoRun = false
 
     // Code is an encoded string of script. If code string is not empty, zpy lab will decode the parameter string and load to code editor
-    let code = `打印("你好, 世界!")`;
-
+    let code = `打印("你好, 世界!")`
 
     if (lastRunningCode) {
         code = lastRunningCode as string
     }
 
     if (params) {
-        const obj = Qs.parse(params, {ignoreQueryPrefix: true});
-        yourUrl = obj.your_url ? (obj.your_url as string) : null;
-        autoRun = obj.auto_run === 'true';
-        code = obj.code ? (obj.code as string) : "";
+        const obj = Qs.parse(params, { ignoreQueryPrefix: true })
+        yourUrl = obj.your_url ? (obj.your_url as string) : null
+        autoRun = obj.auto_run === 'true'
+        code = obj.code ? (obj.code as string) : ''
     }
 
-
     // @ts-ignore
-    const {isFetching: isLoading, refetch} = useQuery(['compiler', input], compiler, {
-        retry: false,
-        refetchInterval: false,
-        refetchOnWindowFocus: false,
-        enabled: false,
-        onSuccess: (result:string) => {
-            // @ts-ignore
-            setResult(result);
-        },
-        onError: (lastError: any) => {
-            // It's necessary to output all exception messages to user at output textbox,
-            // including execution runtime exception and compiling exception -Lidang
-            console.log('Zpy Lab error: \n' + lastError.toString());
-            setResult({
-                outputString: lastError.toString()
-            });
+    const { isFetching: isLoading, refetch } = useQuery(
+        ['compiler', input],
+        // @ts-ignore
+        compiler,
+        {
+            retry: false,
+            refetchInterval: false,
+            refetchOnWindowFocus: false,
+            enabled: false,
+            onSuccess: (result: string) => {
+                // @ts-ignore
+                setResult(result)
+            },
+            onError: (lastError: any) => {
+                // It's necessary to output all exception messages to user at output textbox,
+                // including execution runtime exception and compiling exception -Lidang
+                console.log('Zpy Lab error: \n' + lastError.toString())
+                setResult({
+                    outputString: lastError.toString(),
+                })
+            },
         }
-    });
+    )
 
     const handleLoadTutorial = (event: React.MouseEvent, index: number) => {
-        const str = tutorials[index].source as string;
-        if (str === source) return;
-        setSource(str);
+        const str = tutorials[index].source as string
+        if (str === source) return
+        setSource(str)
         setResult({
-            outputString: ''
-        });
-        setInput(str);
-    };
+            outputString: '',
+        })
+        setInput(str)
+    }
 
     const handleLoadFile = (str: string) => {
-        if (str === source) return;
-        setSource(str);
+        if (str === source) return
+        setSource(str)
         setResult({
-            outputString: ''
-        });
-        setInput(str);
-    };
+            outputString: '',
+        })
+        setInput(str)
+    }
 
     const handleCompileAndRun = () => {
         setResult({
-            outputString: ''
-        });
+            outputString: '',
+        })
         if (source === input) {
-            refetch({force: true} as any);
+            refetch({ force: true } as any)
         } else {
             // console.log("===== SOURCE =====\n", source)
-            setInput(source);
+            setInput(source)
         }
-    };
+    }
 
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
             root: {
-                display: 'flex'
+                display: 'flex',
             },
             content: {
-                flexGrow: 1
-            }
+                flexGrow: 1,
+            },
         })
-    );
+    )
 
-    const classes = useStyles();
-
-    useEffect(() => {
-        if (!!input) refetch({force: true} as any);
-    }, [input, refetch]);
+    const classes = useStyles()
 
     useEffect(() => {
-        queryCache.cancelQueries(['compiler']);
-        getLocalCodeList();
-    }, []);
+        if (!!input) refetch({ force: true } as any)
+    }, [input, refetch])
+
+    useEffect(() => {
+        queryCache.cancelQueries(['compiler'])
+        getLocalCodeList()
+    }, [])
 
     useEffect(() => {
         if (!!code) {
-            setSource(code);
+            setSource(code)
             if (autoRun) {
                 setResult({
-                    outputString: ''
-                });
+                    outputString: '',
+                })
                 setInput(code)
             }
         }
-
-
     }, [autoRun, code])
 
     return (
         <div>
             <div className={classes.root}>
-                <CssBaseline/>
+                <CssBaseline />
 
                 <Header
                     siderBarOpen={sideBarOpen}
@@ -197,18 +201,21 @@ const ZpyLab: React.FC = () => {
                 />
 
                 <main className={classes.content}>
-                    <Toolbar/>
+                    <Toolbar />
 
                     <Grid container>
                         <Grid item xs={12}>
                             <Grid
                                 container
                                 style={{
-                                    height: 'calc(100vh - 174px)'
-                                }}>
+                                    height: 'calc(100vh - 174px)',
+                                }}
+                            >
                                 <Grid item xs={12} md={6}>
                                     <YourCode
-                                        handleCompileAndRun={handleCompileAndRun}
+                                        handleCompileAndRun={
+                                            handleCompileAndRun
+                                        }
                                         setSource={setSource}
                                         source={source}
                                         loading={isLoading}
@@ -223,10 +230,13 @@ const ZpyLab: React.FC = () => {
                                     md={6}
                                     style={{
                                         height: 'calc(100vh - 64px)',
-                                        overflowY: 'auto'
-                                    }}>
+                                        overflowY: 'auto',
+                                    }}
+                                >
                                     <Results
-                                        executionOutputString={result.outputString}
+                                        executionOutputString={
+                                            result.outputString
+                                        }
                                         loading={isLoading}
                                     />
                                 </Grid>
@@ -234,11 +244,11 @@ const ZpyLab: React.FC = () => {
                         </Grid>
                     </Grid>
 
-                    <Footer/>
+                    <Footer />
                 </main>
             </div>
 
-            {((yourUrl)) && (
+            {yourUrl && (
                 <DownloadSnackbar
                     setResult={setResult}
                     setSource={setSource}
@@ -248,7 +258,7 @@ const ZpyLab: React.FC = () => {
                 />
             )}
         </div>
-    );
-};
+    )
+}
 
-export default ZpyLab;
+export default ZpyLab

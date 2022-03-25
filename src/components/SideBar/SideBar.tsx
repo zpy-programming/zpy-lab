@@ -14,7 +14,7 @@ import {
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import SideBarItem from './SideBarItem';
-import { tutorials } from '../../tutorials';
+import { tutorials } from '../../zpy/tutorials';
 import { Theme } from '@mui/material/styles';
 import clsx from 'clsx';
 import DelButton from "./DelButton";

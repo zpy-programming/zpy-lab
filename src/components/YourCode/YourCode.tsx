@@ -87,7 +87,7 @@ const YourCode: React.FC<YourCodeProps> = (props: YourCodeProps) => {
 
     useEffect(() => {
         theme.palette.mode === 'dark' ? setEditorTheme('monacoDarkTheme') : setEditorTheme('vs')
-    })
+    }, [theme.palette.mode])
 
     return (
         <div style={{height: '100%'}}>
@@ -148,6 +148,7 @@ const YourCode: React.FC<YourCodeProps> = (props: YourCodeProps) => {
                             onResize={(width, height) => {
                                 if (editor) {
                                     editor.layout();
+                                    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                                     source
                                 }
                             }}>
