@@ -49,13 +49,6 @@ yarn start
 yarn build
 ```
 
-## 感谢
+## LICENSE
 
-- HedgeHog Lab
-- React
-- TypeScript
-- Monaco Editor
-
-
-
-> 本项目部分包含 [Hedgehog Lab](https://github.com/Hedgehog-Computing/hedgehog-lab) 中的代码 - [Apache 2.0协议](https://github.com/Hedgehog-Computing/hedgehog-lab/blob/master/LICENSE)
+[Apache License 2.0](/LICENSE)
